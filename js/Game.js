@@ -76,12 +76,18 @@ Game.prototype.start = function () {
     }
 
     // 小鸟
-    self.bird.update();
+    // self.bird.update();
     self.bird.render();
 
     // 鼠标点击事件
     self.canvas.onmousedown = function () {
-      alert(1);
+      self.bird.update();
+      self.bird.render();
     };
+    // 鼠标不点击
+    self.canvas.onmouseup=function(){
+      self.bird.update2();
+      self.bird.render();
+    }
   }, 20);
 };
