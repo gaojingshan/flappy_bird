@@ -47,6 +47,8 @@ Game.prototype.start = function () {
   // 实例化大地
   this.land = new Land();
   this.pipesArr = [];
+  // 实例化小鸟
+  this.bird = new Bird();
 
   setInterval(function () {
     self.f++;
@@ -72,5 +74,14 @@ Game.prototype.start = function () {
       self.pipesArr[i].update();
       self.pipesArr[i].render();
     }
+
+    // 小鸟
+    self.bird.update();
+    self.bird.render();
+
+    // 鼠标点击事件
+    self.canvas.onmousedown = function () {
+      alert(1);
+    };
   }, 20);
 };
