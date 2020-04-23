@@ -50,6 +50,9 @@ Game.prototype.start = function () {
   // 实例化小鸟
   this.bird = new Bird();
 
+  // 小鸟锁
+  this.lock = false;
+
   setInterval(function () {
     self.f++;
     self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
@@ -76,7 +79,11 @@ Game.prototype.start = function () {
     }
 
     // 小鸟
-    // self.bird.update();
+    
+    // 刚开始的状态
+    if (self.f % 20 == 0) {
+      self.bird.update3();
+    }
     self.bird.render();
 
     // 鼠标点击事件
@@ -85,9 +92,14 @@ Game.prototype.start = function () {
       self.bird.render();
     };
     // 鼠标不点击
-    self.canvas.onmouseup=function(){
-      self.bird.update2();
-      self.bird.render();
+    self.canvas.onmouseup = function () {
+      self.lock = true;
+    };
+    if (self.f % 10 == 0) {
+      if (self.lock) {        
+        self.bird.update2();
+        self.bird.render();
+      }
     }
   }, 20);
 };
