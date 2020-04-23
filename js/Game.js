@@ -46,6 +46,7 @@ Game.prototype.start = function () {
 
   // 实例化大地
   this.land = new Land();
+  
   this.pipesArr = [];
   // 实例化小鸟
   this.bird = new Bird();
