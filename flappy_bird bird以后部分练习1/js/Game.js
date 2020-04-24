@@ -70,13 +70,9 @@ Game.prototype.start = function () {
 
   // 管子有很多，所以准备个管子数组
   this.pipesArr = [];
+
   // 实例化小鸟
   this.bird = new Bird();
-
-  // 添加监听
-  this.canvas.onmousedown = function () {
-    self.bird.fly();
-  };
 
   // 定时器
   setInterval(function () {
@@ -109,7 +105,7 @@ Game.prototype.start = function () {
       self.pipesArr[i].render();
     }
 
-    // 小鸟
+    // 每帧都调用Bird的update和render方法
     self.bird.update();
     self.bird.render();
   }, 20);
