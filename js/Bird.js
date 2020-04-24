@@ -1,57 +1,33 @@
+// 小鸟类
 function Bird() {
-  // 显示图片的位置
-  this.wz = 0;
-  //   小鸟的位置
-  this.x = 0;
-  this.y = 0;
-  this.arrDy = [4, -4];
+  this.x = game.canvas.width / 2;
+  // 竖直往下降
+  this.y = 100;
+  this.dy = 1;
+  // 旋转角度
+  // this.r = 0;
+  this.r = 0.1;
 
-  this.zhen = 0;
+  // 挥动小翅膀
+  this.step = 0;
 }
-// 还没开始游戏的时候
-Bird.prototype.update3 = function () {
-  this.zhen++;
-  if (this.zhen > 2) {
-    this.zhen = 0;
-  }
-  if (this.zhen == 1) {
-    this.y += this.arrDy[0];
-  } else if (this.zhen == 2) {
-    this.y += this.arrDy[1];
-  }
-  this.wz += 92;
-  if (this.wz >= 276) {
-    this.wz = 0;
-  }
-};
-// 鼠标点击的时候
 Bird.prototype.update = function () {
-  // this.x += 10;
-  this.y -= 100;
-  // game.R['bird'].rotate((Math.PI * 2) / 30);
-};
-Bird.prototype.update2 = function () {
-  // 当鼠标不在点击的时候
-  this.y += 40;
-};
-
-Bird.prototype.render = function () {
-  this.x = game.canvas.width / 2 - 23;
-  game.ctx.drawImage(
-    game.R['bird'],
-    this.wz,
-    0,
-    92,
-    64,
-    this.x,
-    game.canvas.height / 2 - 80 + this.y,
-    46,
-    32
-  );
-  if (
-    game.canvas.height / 2 - 80 + this.y < 0 ||
-    game.canvas.height / 2 - 80 + this.y == game.canvas.height - 80
-  ) {
-    alert('游戏结束');
+  this.dy += 0.4;
+  this.y += this.dy;
+  // this.r = -45;
+  this.r += 0.05;
+  // 扑腾翅膀
+  if (game.f % 10 == 0) {
+    this.step++;
+    if (this.step > 2) {
+      this.step = 0;
+    }
   }
+};
+Bird.prototype.render = function () {
+  game.ctx.save();
+  game.ctx.translate(this.x, this.y);
+  game.ctx.rotate(this.r);
+  game.ctx.drawImage(game.R.bird, 46 * this.step, 0, 46, 32, -23, -16, 46, 32);
+  game.ctx.restore();
 };
