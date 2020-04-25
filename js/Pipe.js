@@ -8,6 +8,12 @@ function Pipe() {
   this.gap = 260;
   // 下管子的高度就有了，80是大地
   this.pipe1H = game.canvas.height - 80 - this.pipe2H - this.gap;
+  // 自己的AABB盒
+  this.x1 = this.x;
+  this.x2 = this.x + 90;
+  this.y1 = this.pipe2H;
+  this.y2 = this.pipe2H + this.gap;
+
   // 加入到管子数组中
   game.pipesArr.push(this);
 }
@@ -21,6 +27,11 @@ Pipe.prototype.update = function () {
       }
     }
   }
+  // 每帧更新自己的AABB盒
+  this.x1 = this.x;
+  this.x2 = this.x + 90;
+  this.y1 = this.pipe2H;
+  this.y2 = this.pipe2H + this.gap;
 };
 Pipe.prototype.render = function () {
   // 绘制上管子

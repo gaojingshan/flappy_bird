@@ -9,12 +9,21 @@ function Bird() {
   this.step = 0;
   // 下落加速度
   this.dy = 1;
+  // 飞的状态量
+  this.isFly = false;
 }
 Bird.prototype.update = function () {
-  this.dy += 0.2;
+  if (!this.isFly) {
+    this.dy += 0.6;
+  } else {
+    this.dy += 0.9;
+    if (this.y > 0) {
+      this.isFly = false;
+    }
+  }
   this.y += this.dy;
   // 旋转角度
-  this.r += 0.03;
+  this.r += 0.05;
   if (game.f % 3 == 0) {
     this.step++;
     if (this.step > 2) {
@@ -38,4 +47,10 @@ Bird.prototype.render = function () {
     40
   );
   game.ctx.restore();
+};
+
+Bird.prototype.fly = function () {
+  this.dy = -17;
+  this.r = -1;
+  this.isFly = true;
 };

@@ -74,6 +74,10 @@ Game.prototype.start = function () {
   // 实例化小鸟
   this.bird = new Bird();
 
+  this.canvas.onmousedown = function () {
+    self.bird.fly();
+  };
+
   // 定时器
   setInterval(function () {
     // 帧编号加1
